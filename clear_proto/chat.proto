@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+
+service MessageService {
+  rpc join(stream Message) returns (stream Message){};
+  rpc send(Message) returns (Message){};
+}
+
+message Message {
+  string author = 2;
+  string text = 3;
+  google.protobuf.Timestamp time = 4;
+}
