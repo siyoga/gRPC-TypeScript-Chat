@@ -3,44 +3,42 @@
 'use strict';
 var grpc = require('grpc');
 var chat_pb = require('./chat_pb.js');
-var google_protobuf_timestamp_pb = require('google-protobuf/google/protobuf/timestamp_pb.js');
 
-function serialize_Message(arg) {
-  if (!(arg instanceof chat_pb.Message)) {
-    throw new Error('Expected argument of type Message');
+function serialize_MessageReq(arg) {
+  if (!(arg instanceof chat_pb.MessageReq)) {
+    throw new Error('Expected argument of type MessageReq');
   }
   return Buffer.from(arg.serializeBinary());
 }
 
-function deserialize_Message(buffer_arg) {
-  return chat_pb.Message.deserializeBinary(new Uint8Array(buffer_arg));
+function deserialize_MessageReq(buffer_arg) {
+  return chat_pb.MessageReq.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
-var MessageServiceService = (exports.MessageServiceService = {
-  join: {
-    path: '/MessageService/join',
+function serialize_MessageRes(arg) {
+  if (!(arg instanceof chat_pb.MessageRes)) {
+    throw new Error('Expected argument of type MessageRes');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_MessageRes(buffer_arg) {
+  return chat_pb.MessageRes.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+
+var ChatService = exports.ChatService = {
+  chatting: {
+    path: '/Chat/Chatting',
     requestStream: true,
     responseStream: true,
-    requestType: chat_pb.Message,
-    responseType: chat_pb.Message,
-    requestSerialize: serialize_Message,
-    requestDeserialize: deserialize_Message,
-    responseSerialize: serialize_Message,
-    responseDeserialize: deserialize_Message,
+    requestType: chat_pb.MessageReq,
+    responseType: chat_pb.MessageRes,
+    requestSerialize: serialize_MessageReq,
+    requestDeserialize: deserialize_MessageReq,
+    responseSerialize: serialize_MessageRes,
+    responseDeserialize: deserialize_MessageRes,
   },
-  send: {
-    path: '/MessageService/send',
-    requestStream: false,
-    responseStream: false,
-    requestType: chat_pb.Message,
-    responseType: chat_pb.Message,
-    requestSerialize: serialize_Message,
-    requestDeserialize: deserialize_Message,
-    responseSerialize: serialize_Message,
-    responseDeserialize: deserialize_Message,
-  },
-});
+};
 
-exports.MessageServiceClient = grpc.makeGenericClientConstructor(
-  MessageServiceService
-);
+exports.ChatClient = grpc.makeGenericClientConstructor(ChatService);

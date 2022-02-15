@@ -5,33 +5,46 @@
 /* eslint-disable */
 
 import * as jspb from "google-protobuf";
-import * as google_protobuf_timestamp_pb from "google-protobuf/google/protobuf/timestamp_pb";
 
-export class Message extends jspb.Message { 
-    getAuthor(): string;
-    setAuthor(value: string): Message;
+export class MessageReq extends jspb.Message { 
     getText(): string;
-    setText(value: string): Message;
-
-    hasTime(): boolean;
-    clearTime(): void;
-    getTime(): google_protobuf_timestamp_pb.Timestamp | undefined;
-    setTime(value?: google_protobuf_timestamp_pb.Timestamp): Message;
+    setText(value: string): MessageReq;
 
     serializeBinary(): Uint8Array;
-    toObject(includeInstance?: boolean): Message.AsObject;
-    static toObject(includeInstance: boolean, msg: Message): Message.AsObject;
+    toObject(includeInstance?: boolean): MessageReq.AsObject;
+    static toObject(includeInstance: boolean, msg: MessageReq): MessageReq.AsObject;
     static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
     static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-    static serializeBinaryToWriter(message: Message, writer: jspb.BinaryWriter): void;
-    static deserializeBinary(bytes: Uint8Array): Message;
-    static deserializeBinaryFromReader(message: Message, reader: jspb.BinaryReader): Message;
+    static serializeBinaryToWriter(message: MessageReq, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): MessageReq;
+    static deserializeBinaryFromReader(message: MessageReq, reader: jspb.BinaryReader): MessageReq;
 }
 
-export namespace Message {
+export namespace MessageReq {
+    export type AsObject = {
+        text: string,
+    }
+}
+
+export class MessageRes extends jspb.Message { 
+    getAuthor(): string;
+    setAuthor(value: string): MessageRes;
+    getText(): string;
+    setText(value: string): MessageRes;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): MessageRes.AsObject;
+    static toObject(includeInstance: boolean, msg: MessageRes): MessageRes.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: MessageRes, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): MessageRes;
+    static deserializeBinaryFromReader(message: MessageRes, reader: jspb.BinaryReader): MessageRes;
+}
+
+export namespace MessageRes {
     export type AsObject = {
         author: string,
         text: string,
-        time?: google_protobuf_timestamp_pb.Timestamp.AsObject,
     }
 }

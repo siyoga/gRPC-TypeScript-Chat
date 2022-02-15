@@ -4,6 +4,12 @@
   "main": "index.js",
   "license": "MIT",
   "author": "Sergey Dyakov",
+  "scripts": {
+    "dev-server": "nodemon --exec ts-node src/server.ts",
+    "dev-client": "nodemon --exec ts-node src/client.ts",
+    "start-server": "ts-node src/server.ts",
+    "start-client": "ts-node src/client.ts"
+  },
   "dependencies": {
     "@grpc/proto-loader": "^0.6.9",
     "body-parser": "^1.19.1",
@@ -14,5 +20,7 @@
     "hbs": "^4.2.0",
     "uuid": "^8.3.2"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
 }

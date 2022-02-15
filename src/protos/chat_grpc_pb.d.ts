@@ -6,53 +6,35 @@
 
 import * as grpc from "grpc";
 import * as chat_pb from "./chat_pb";
-import * as google_protobuf_timestamp_pb from "google-protobuf/google/protobuf/timestamp_pb";
 
-interface IMessageServiceService extends grpc.ServiceDefinition<grpc.UntypedServiceImplementation> {
-    join: IMessageServiceService_Ijoin;
-    send: IMessageServiceService_Isend;
+interface IChatService extends grpc.ServiceDefinition<grpc.UntypedServiceImplementation> {
+    chatting: IChatService_IChatting;
 }
 
-interface IMessageServiceService_Ijoin extends grpc.MethodDefinition<chat_pb.Message, chat_pb.Message> {
-    path: "/MessageService/join";
+interface IChatService_IChatting extends grpc.MethodDefinition<chat_pb.MessageReq, chat_pb.MessageRes> {
+    path: "/Chat/Chatting";
     requestStream: true;
     responseStream: true;
-    requestSerialize: grpc.serialize<chat_pb.Message>;
-    requestDeserialize: grpc.deserialize<chat_pb.Message>;
-    responseSerialize: grpc.serialize<chat_pb.Message>;
-    responseDeserialize: grpc.deserialize<chat_pb.Message>;
-}
-interface IMessageServiceService_Isend extends grpc.MethodDefinition<chat_pb.Message, chat_pb.Message> {
-    path: "/MessageService/send";
-    requestStream: false;
-    responseStream: false;
-    requestSerialize: grpc.serialize<chat_pb.Message>;
-    requestDeserialize: grpc.deserialize<chat_pb.Message>;
-    responseSerialize: grpc.serialize<chat_pb.Message>;
-    responseDeserialize: grpc.deserialize<chat_pb.Message>;
+    requestSerialize: grpc.serialize<chat_pb.MessageReq>;
+    requestDeserialize: grpc.deserialize<chat_pb.MessageReq>;
+    responseSerialize: grpc.serialize<chat_pb.MessageRes>;
+    responseDeserialize: grpc.deserialize<chat_pb.MessageRes>;
 }
 
-export const MessageServiceService: IMessageServiceService;
+export const ChatService: IChatService;
 
-export interface IMessageServiceServer {
-    join: grpc.handleBidiStreamingCall<chat_pb.Message, chat_pb.Message>;
-    send: grpc.handleUnaryCall<chat_pb.Message, chat_pb.Message>;
+export interface IChatServer {
+    chatting: grpc.handleBidiStreamingCall<chat_pb.MessageReq, chat_pb.MessageRes>;
 }
 
-export interface IMessageServiceClient {
-    join(): grpc.ClientDuplexStream<chat_pb.Message, chat_pb.Message>;
-    join(options: Partial<grpc.CallOptions>): grpc.ClientDuplexStream<chat_pb.Message, chat_pb.Message>;
-    join(metadata: grpc.Metadata, options?: Partial<grpc.CallOptions>): grpc.ClientDuplexStream<chat_pb.Message, chat_pb.Message>;
-    send(request: chat_pb.Message, callback: (error: grpc.ServiceError | null, response: chat_pb.Message) => void): grpc.ClientUnaryCall;
-    send(request: chat_pb.Message, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: chat_pb.Message) => void): grpc.ClientUnaryCall;
-    send(request: chat_pb.Message, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: chat_pb.Message) => void): grpc.ClientUnaryCall;
+export interface IChatClient {
+    chatting(): grpc.ClientDuplexStream<chat_pb.MessageReq, chat_pb.MessageRes>;
+    chatting(options: Partial<grpc.CallOptions>): grpc.ClientDuplexStream<chat_pb.MessageReq, chat_pb.MessageRes>;
+    chatting(metadata: grpc.Metadata, options?: Partial<grpc.CallOptions>): grpc.ClientDuplexStream<chat_pb.MessageReq, chat_pb.MessageRes>;
 }
 
-export class MessageServiceClient extends grpc.Client implements IMessageServiceClient {
+export class ChatClient extends grpc.Client implements IChatClient {
     constructor(address: string, credentials: grpc.ChannelCredentials, options?: object);
-    public join(options?: Partial<grpc.CallOptions>): grpc.ClientDuplexStream<chat_pb.Message, chat_pb.Message>;
-    public join(metadata?: grpc.Metadata, options?: Partial<grpc.CallOptions>): grpc.ClientDuplexStream<chat_pb.Message, chat_pb.Message>;
-    public send(request: chat_pb.Message, callback: (error: grpc.ServiceError | null, response: chat_pb.Message) => void): grpc.ClientUnaryCall;
-    public send(request: chat_pb.Message, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: chat_pb.Message) => void): grpc.ClientUnaryCall;
-    public send(request: chat_pb.Message, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: chat_pb.Message) => void): grpc.ClientUnaryCall;
+    public chatting(options?: Partial<grpc.CallOptions>): grpc.ClientDuplexStream<chat_pb.MessageReq, chat_pb.MessageRes>;
+    public chatting(metadata?: grpc.Metadata, options?: Partial<grpc.CallOptions>): grpc.ClientDuplexStream<chat_pb.MessageReq, chat_pb.MessageRes>;
 }
