@@ -22,7 +22,9 @@ sh build-protos.sh
 
 ```bash
 # run server:
+npm start start-server
 yarn start-server
 # run client:
+npm start start-client
 yarn start-client *your name*
 ```
